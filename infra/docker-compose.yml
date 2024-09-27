@@ -1,7 +1,9 @@
-services:
+version: '3.8'  # Укажите версию, если это необходимо
 
+services:
   db:
     image: postgres:13.0-alpine
+    platform: linux/arm64
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     env_file:
@@ -19,6 +21,7 @@ services:
       - db
     env_file:
       - ./.env
+    command: gunicorn --bind 0.0.0.0:8000 --workers=4 --timeout=120 foodgram.wsgi:application  # Убедитесь, что указан правильный модуль и приложение
 
   frontend:
     image: mregor123/foodgram_frontend:latest
@@ -27,6 +30,7 @@ services:
 
   nginx:
     image: nginx:1.21.3-alpine
+    platform: linux/arm64
     ports:
       - "80:80"
       - "443:443"

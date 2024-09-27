@@ -1,9 +1,13 @@
-# build env
-FROM node:21.7.1-alpine
+FROM node:16-alpine
+
 WORKDIR /app
-COPY package*.json ./
+
+COPY package*.json .
+
 RUN npm install
-COPY . ./
+
+COPY . .
+
 RUN npm run build
-# Копируем файлы в общий том, указанный в docker-compose.yml
-CMD cp -r build/* /static/
+
+CMD cp -r build result_build

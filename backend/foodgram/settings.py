@@ -10,9 +10,9 @@ load_dotenv()
 
 # Получите значения переменных окружения
 SECRET_KEY = os.getenv('SECRET_KEY', 'SECRET_KEY')
-DEBUG = os.getenv('DEBUG', 'False') == 'True'
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '127.0.0.1 localhost').split()
-CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS', '').split()
+DEBUG = True
+ALLOWED_HOSTS = ['backend', 'localhost', '127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['http://localhost', 'http://127.0.0.1']
 
 # Настройка базы данных
 DATABASES = {
@@ -21,7 +21,7 @@ DATABASES = {
         'NAME': os.getenv('DB_NAME'),
         'USER': os.getenv('POSTGRES_USER'),
         'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
-        'HOST': os.getenv('DB_HOST', 'localhost'),
+        'HOST': os.getenv('DB_HOST', 'localhost'), # db
         'PORT': os.getenv('DB_PORT', '5432'),
     }
 }
