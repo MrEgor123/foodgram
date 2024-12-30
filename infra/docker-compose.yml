@@ -29,7 +29,7 @@ services:
       - foodgram_network
 
   frontend:
-    image: ${DOCKER_USERNAME}/foodgram-frontend:latest
+    image: ${DOCKER_USERNAME}/foodgram_frontend:latest
     platform: linux/amd64
     volumes:
      - ../frontend/build:/app/result_build/
