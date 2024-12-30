@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import include, path
 from django.http import HttpResponse
-from django.shortcuts import redirect
+
 
 # Пример представления для корневого URL
 def home(request):

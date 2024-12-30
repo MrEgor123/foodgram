@@ -68,8 +68,12 @@ class CustomUserViewSet(UserViewSet):
         avatar = request.FILES.get('avatar')
 
         if not avatar:
-            return Response({'detail': 'Файл не найден.'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                {'detail': 'Файл не найден.'},
+                status=status.HTTP_400_BAD_REQUEST)
 
         user.avatar = avatar
         user.save()
-        return Response({'detail': 'Аватарка обновлена.'}, status=status.HTTP_200_OK)
+        return Response(
+            {'detail': 'Аватарка обновлена.'},
+            status=status.HTTP_200_OK)

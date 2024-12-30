@@ -10,7 +10,7 @@ class User(AbstractUser):
         'first_name',
         'last_name',
     ]
-    
+
     email = models.EmailField(
         'email address',
         max_length=254,
@@ -19,7 +19,7 @@ class User(AbstractUser):
 
     # Поле для аватарки
     avatar = models.ImageField(
-        upload_to='avatars/',  # Папка для загрузки аватарок внутри MEDIA_ROOT
+        upload_to='avatars/',
         null=True,
         blank=True,
         verbose_name='Аватарка'
@@ -66,7 +66,9 @@ class Subscribe(models.Model):
     class Meta:
         ordering = ['-id']
         constraints = [
-            UniqueConstraint(fields=['user', 'author'], name='unique_subscription')
+            UniqueConstraint(
+                fields=['user', 'author'],
+                name='unique_subscription')
         ]
         verbose_name = 'Подписка'
         verbose_name_plural = 'Подписки'
