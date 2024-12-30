@@ -2,6 +2,7 @@ from django.contrib.auth.models import AbstractUser, Group, Permission
 from django.db import models
 from django.db.models import UniqueConstraint
 
+
 class User(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = [
@@ -16,17 +17,24 @@ class User(AbstractUser):
         unique=True,
     )
 
-    # Переопределите поля groups и user_permissions, чтобы избежать конфликтов
+    # Поле для аватарки
+    avatar = models.ImageField(
+        upload_to='avatars/',  # Папка для загрузки аватарок внутри MEDIA_ROOT
+        null=True,
+        blank=True,
+        verbose_name='Аватарка'
+    )
+
     groups = models.ManyToManyField(
         Group,
-        related_name='custom_user_set',  # Уникальное имя для обратной связи
+        related_name='custom_user_set',
         blank=True,
         help_text='The groups this user belongs to.',
         verbose_name='groups',
     )
     user_permissions = models.ManyToManyField(
         Permission,
-        related_name='custom_user_permissions_set',  # Уникальное имя для обратной связи
+        related_name='custom_user_permissions_set',
         blank=True,
         help_text='Specific permissions for this user.',
         verbose_name='user permissions',

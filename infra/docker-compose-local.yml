@@ -1,4 +1,4 @@
-version: '3.8'  # Укажите версию, если это необходимо
+version: '3.8'
 
 services:
   db:
@@ -11,7 +11,7 @@ services:
     restart: always
 
   backend:
-    image: mregor123/foodgram_backend:latest
+    image: ${DOCKER_USERNAME}/foodgram_backend:latest
     restart: always
     volumes:
       - static_value:/app/static/
@@ -21,10 +21,10 @@ services:
       - db
     env_file:
       - ./.env
-    command: gunicorn --bind 0.0.0.0:8000 --workers=4 --timeout=120 foodgram.wsgi:application  # Убедитесь, что указан правильный модуль и приложение
+    command: gunicorn --bind 0.0.0.0:8000 --workers=4 --timeout=120 foodgram.wsgi:application 
 
   frontend:
-    image: mregor123/foodgram_frontend:latest
+    image: ${DOCKER_USERNAME}/foodgram_frontend:latest
     volumes:
       - ../frontend/:/app/result_build/
 

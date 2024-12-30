@@ -11,8 +11,8 @@ load_dotenv()
 # Получите значения переменных окружения
 SECRET_KEY = os.getenv('SECRET_KEY', 'SECRET_KEY')
 DEBUG = True
-ALLOWED_HOSTS = ['backend', 'localhost', '127.0.0.1']
-CSRF_TRUSTED_ORIGINS = ['http://localhost', 'http://127.0.0.1']
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost').split(',')
+CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS', 'http://localhost,http://127.0.0.1').split(',')
 
 # Настройка базы данных
 DATABASES = {
