@@ -3,9 +3,9 @@ from django.urls import include, path
 from django.http import HttpResponse
 
 
-# Пример представления для корневого URL
 def home(request):
     return HttpResponse("Welcome to Foodgram!")
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),

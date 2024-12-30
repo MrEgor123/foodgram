@@ -75,7 +75,7 @@ class RecipeViewSet(ModelViewSet):
     def add_to(self, model, user, pk):
         if model.objects.filter(user=user, recipe__id=pk).exists():
             return Response(
-                {'errors': 'Рецепт уже добавлен!'}, 
+                {'errors': 'Рецепт уже добавлен!'},
                 status=status.HTTP_400_BAD_REQUEST)
         recipe = get_object_or_404(Recipe, id=pk)
         model.objects.create(user=user, recipe=recipe)
@@ -88,7 +88,7 @@ class RecipeViewSet(ModelViewSet):
             obj.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         return Response(
-            {'errors': 'Рецепт уже удален!'}, 
+            {'errors': 'Рецепт уже удален!'},
             status=status.HTTP_400_BAD_REQUEST)
 
     @action(
