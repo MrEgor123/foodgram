@@ -14,7 +14,8 @@ class Ingredient(models.Model):
     """ Модель Ингредиент. """
 
     name = models.CharField('Название', max_length=LENGTH_MAX)
-    measurement_unit = models.CharField('Единица измерения', max_length=LENGTH_MAX)
+    measurement_unit = models.CharField('Единица измерения',
+                                        max_length=LENGTH_MAX)
 
     class Meta:
         verbose_name = 'Ингредиент'
@@ -40,7 +41,8 @@ class Tag(models.Model):
             )
         ]
     )
-    slug = models.SlugField('Уникальный слаг', unique=True, max_length=LENGTH_MAX)
+    slug = models.SlugField('Уникальный слаг', unique=True,
+                            max_length=LENGTH_MAX)
 
     class Meta:
         verbose_name = 'Тег'

@@ -84,7 +84,8 @@ class SubscribeSerializer(CustomUserSerializer):
         recipes = obj.author.recipes.all()
         if recipes_limit:
             recipes = recipes[:int(recipes_limit)]
-        return RecipeShortSerializer(recipes, many=True, context=self.context).data
+        return RecipeShortSerializer(recipes, many=True,
+                                     context=self.context).data
 
 
 class IngredientSerializer(ModelSerializer):

@@ -5,6 +5,7 @@ from django.db.models import UniqueConstraint
 
 LENGTH_MAX = 254
 
+
 class User(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = [
