@@ -1,15 +1,19 @@
-from api.pagination import CustomPagination
-from api.serializers import CustomUserSerializer, SubscribeSerializer
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
-from djoser.views import UserViewSet
+
 from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser
 
+from djoser.views import UserViewSet
+
+from api.pagination import CustomPagination
+from api.serializers import CustomUserSerializer, SubscribeSerializer
+
 from .models import Subscribe
+
 
 User = get_user_model()
 
@@ -32,7 +36,7 @@ class CustomUserViewSet(UserViewSet):
         if request.method == 'POST':
             serializer = SubscribeSerializer(author,
                                              data=request.data,
-                                             context={"request": request})
+                                             context={'request': request})
             serializer.is_valid(raise_exception=True)
             Subscribe.objects.create(user=user, author=author)
             return Response(serializer.data, status=status.HTTP_201_CREATED)

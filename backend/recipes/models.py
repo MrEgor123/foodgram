@@ -1,16 +1,20 @@
 from django.contrib.auth import get_user_model
-from django.core.validators import MinValueValidator, RegexValidator
 from django.db import models
 from django.db.models import UniqueConstraint
+from django.core.validators import MinValueValidator, RegexValidator
+
 
 User = get_user_model()
+LENGTH_HEX = 7
+LENGTH_MAX = 200
+REG = '^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$'
 
 
 class Ingredient(models.Model):
-    """ Модель Ингридиент """
+    """ Модель Ингредиент. """
 
-    name = models.CharField('Название', max_length=200)
-    measurement_unit = models.CharField('Единица измерения', max_length=200)
+    name = models.CharField('Название', max_length=LENGTH_MAX)
+    measurement_unit = models.CharField('Единица измерения', max_length=LENGTH_MAX)
 
     class Meta:
         verbose_name = 'Ингредиент'
@@ -22,21 +26,21 @@ class Ingredient(models.Model):
 
 
 class Tag(models.Model):
-    """ Модель Тэг """
+    """ Модель Тэг. """
 
-    name = models.CharField('Название', unique=True, max_length=200)
+    name = models.CharField('Название', unique=True, max_length=LENGTH_MAX)
     color = models.CharField(
         'Цветовой HEX-код',
         unique=True,
-        max_length=7,
+        max_length=LENGTH_HEX,
         validators=[
             RegexValidator(
-                regex='^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$',
+                regex=REG,
                 message='Введенное значение не является цветом в формате HEX!'
             )
         ]
     )
-    slug = models.SlugField('Уникальный слаг', unique=True, max_length=200)
+    slug = models.SlugField('Уникальный слаг', unique=True, max_length=LENGTH_MAX)
 
     class Meta:
         verbose_name = 'Тег'
@@ -47,9 +51,9 @@ class Tag(models.Model):
 
 
 class Recipe(models.Model):
-    """ Модель Рецепт """
+    """ Модель Рецепт. """
 
-    name = models.CharField('Название', max_length=200)
+    name = models.CharField('Название', max_length=LENGTH_MAX)
     author = models.ForeignKey(
         User,
         related_name='recipes',
@@ -88,7 +92,7 @@ class Recipe(models.Model):
 
 
 class IngredientInRecipe(models.Model):
-    """ Модель для связи Ингридиента и Рецепта """
+    """ Модель для связи Ингридиента и Рецепта. """
 
     recipe = models.ForeignKey(
         Recipe,
@@ -118,7 +122,7 @@ class IngredientInRecipe(models.Model):
 
 
 class Favourite(models.Model):
-    """ Модель Избранное """
+    """ Модель Избранное. """
 
     user = models.ForeignKey(
         User,
@@ -147,7 +151,7 @@ class Favourite(models.Model):
 
 
 class ShoppingCart(models.Model):
-    """ Модель Корзина покупок """
+    """ Модель Корзина покупок. """
 
     user = models.ForeignKey(
         User,
