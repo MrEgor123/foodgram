@@ -1,4 +1,15 @@
-Находясь в папке infra, выполните команду docker-compose up. При выполнении этой команды контейнер frontend, описанный в docker-compose.yml, подготовит файлы, необходимые для работы фронтенд-приложения, а затем прекратит свою работу.
+Адрес сайта: https://foodgrampro.zapto.org/
+Админка: https://foodgrampro.zapto.org/admin
 
-По адресу http://localhost изучите фронтенд веб-приложения, а по адресу http://localhost/api/docs/ — спецификацию API.
+Данные:
 
+Данные от админки:
+email: egor.charus4444@mail.ru
+пароль: 1234567890
+
+Данные от пользователей на сайте
+email: egor.charus2402@mail.ru
+пароль: 1234567890
+
+email: o.bagaeva_1215@mail.ru
+пароль: 1234567890
